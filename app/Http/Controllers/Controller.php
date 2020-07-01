@@ -22,18 +22,17 @@ class Controller extends BaseController
         $gioitinh = $request->gioitinh;
         $quoctich = $request->quoctich;
         $diachi = $request->diachi;
-        $sodienthoai = $request->sodienthoai;
+        $sodienthoai = $request->sdt;
         $email = $request->email;
 
-        if($hovaten == null  && $CMT == null && $ngaysinh == null && $gioitinh == null && $quoctich == null && $diachi == null &&  $sodienthoai == null){
+        if($hovaten == null  && $ngaysinh == null && $gioitinh == null && $quoctich == null && $diachi == null ){
             return response()->json([
                 'success'=>false,
                 ]);
         }
         if($hovaten != null  && $CMT != null && $ngaysinh != null && $gioitinh != null && $quoctich != null && $diachi != null &&  $sodienthoai != null){
           
-            $insertthongtincanhan = DB::table('thongtinnguoidung')->insert(['hovaten'=>$hovaten,
-            'CMT'=>$CMT,
+            $insertthongtincanhan = DB::table('thongtinnguoidung')->where('CMT',$CMT)->update(['hovaten'=>$hovaten,
             'BHXH'=>$BHXH,
             'ngaysinh'=>$ngaysinh,
             'gioitinh'=>$gioitinh,
@@ -42,8 +41,7 @@ class Controller extends BaseController
             'sodienthoai'=>$sodienthoai,
             'email'=>$email]);
 
-            $insertthongtinbenhcanhan = DB::table('thongtinbenhcanhan')->insert([
-                                        'CMT'=>$CMT,
+            $insertthongtinbenhcanhan = DB::table('thongtinbenhcanhan')->where('CMT',$CMT)->update([
                                         'tinhhinh'=>$request->tinhhinh,
                                         'didenvungquocgia'=>$request->didenvungquocgia,
                                         'dauhieu'=>$request->dauhieu,
@@ -53,8 +51,11 @@ class Controller extends BaseController
                                     'success'=>true,
                                     ]);
         }
-        
+   
 
     }
+
+
+    
 
 }

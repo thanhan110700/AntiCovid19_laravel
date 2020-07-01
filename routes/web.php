@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::POST('khaibaoytetunguyen','Controller@getKhaibao');    
+Route::POST('khaibaoytetunguyen','Controller@getKhaibao');   
+    
